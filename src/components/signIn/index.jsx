@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 //-------------
 import {withRouter} from 'react-router-dom';
 //-------------
+import * as signInAction from '../../actions/authentication/index'
 import {css, StyleSheet} from 'aphrodite'
 import {
     Button,
@@ -19,29 +20,28 @@ class SignIn extends Component {
         this.state = {
             loading: false,
             errorMessage: '',
-            email: '',
+            username: '',
             password: ''
         }
     }
 
     onFormSubmit = async () => {
         try {
-            let {email, password} = this.state
-            email = email.trim()
-            if (!email)
-                return this.setState({errorMessage: "Enter email"})
+            let {username, password} = this.state
+            username = username.trim()
+            if (!username)
+                return this.setState({errorMessage: "Enter username"})
             if (!password)
                 return this.setState({errorMessage: "Enter password"})
             this.setState({
                 loading: true,
                 errorMessage: '',
             })
-            // await tokenActions.get(login, password)
-            // this.props.history.push('/profile')
-            console.log("УРА")
+            await signInAction.getProject(username, password)
             this.setState({
                 loading: false,
             })
+            this.props.history.push('/');
         } catch (error) {
             this.setState({loading: false, errorMessage: error.message})
             console.log(error)
@@ -58,10 +58,11 @@ class SignIn extends Component {
         let {
             loading,
             errorMessage,
-            email,
+            username,
             password,
         } = this.state
-        console.log("SIGN_IN_STATE", this.state)
+
+        // console.log("SIGN_IN_STATE", this.state)
         return (
             <div className={css(styles.wrapper)}>
                 <div className={css(styles.body)}>
@@ -74,18 +75,18 @@ class SignIn extends Component {
                             content={errorMessage}
                         />
                         <Form.Field>
-                            <label>Email</label>
+                            <label>Username</label>
                             <Input
                                 name="login"
                                 autoComplete="username"
                                 type="text"
                                 size="large"
                                 autoCorrect="off"
-                                placeholder="Email"
+                                placeholder="Username"
                                 onChange={(e, data) =>
-                                    this.onChangeForm('email', data.value)
+                                    this.onChangeForm('username', data.value)
                                 }
-                                value={email}
+                                value={username}
                                 label={{icon: 'asterisk'}}
                                 labelPosition="right corner"
                             />

@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {css, StyleSheet} from 'aphrodite'
 //-------------
 import SignIn from "../signIn";
+import Home from "../home/index";
 //-------------
 
 //-------------
@@ -15,7 +16,8 @@ class Wrapper extends Component {
             <div className={css(styles.wrapper)}>
                 <Router>
                     <Switch>
-                        <Route path="/" component={SignIn}/>
+                        <Route exact path="/" component={Home}/>
+                        <Route exact path="/signIn" component={SignIn}/>
                     </Switch>
                 </Router>
             </div>
