@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import Wrapper from './components/wrapper'
 //-------------
 import './index.css';
+import 'semantic-ui/dist/semantic.min.css';
 //-------------
 import * as serviceWorker from './serviceWorker';
 //-------------
