@@ -1,0 +1,4 @@
+export const USER = {
+    SET_USER_INFO: 'SET_USER_INFO',
+    UNSET_USER_INFO: 'UNSET_USER_INFO',
+}

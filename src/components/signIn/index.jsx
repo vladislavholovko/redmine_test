@@ -1,22 +1,19 @@
 import React, {Component} from 'react'
 //-------------
-import {withRouter} from 'react-router-dom';
+import * as userInfoActions from '../../actions/userActions/index'
 //-------------
-import * as signInAction from '../../actions/authentication/index'
-import {css, StyleSheet} from 'aphrodite'
 import {
     Button,
     Input,
     Form,
     Message,
 } from 'semantic-ui-react'
-//-------------
-//-------------
+import './index.css';
 //-------------
 
 class SignIn extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             loading: false,
             errorMessage: '',
@@ -27,32 +24,32 @@ class SignIn extends Component {
 
     onFormSubmit = async () => {
         try {
-            let {username, password} = this.state
-            username = username.trim()
+            let {username, password} = this.state;
+            username = username.trim();
             if (!username)
-                return this.setState({errorMessage: "Enter username"})
+                return this.setState({errorMessage: "Enter username"});
             if (!password)
-                return this.setState({errorMessage: "Enter password"})
+                return this.setState({errorMessage: "Enter password"});
             this.setState({
                 loading: true,
                 errorMessage: '',
-            })
-            await signInAction.getProject(username, password)
+            });
+            await userInfoActions.signIn(username, password);
             this.setState({
                 loading: false,
-            })
+            });
             this.props.history.push('/');
         } catch (error) {
-            this.setState({loading: false, errorMessage: error.message})
+            this.setState({loading: false, errorMessage: error.message});
             console.log(error)
         }
-    }
+    };
 
     onChangeForm = (field, value) => {
         this.setState({
             [field]: value,
         })
-    }
+    };
 
     render() {
         let {
@@ -60,14 +57,14 @@ class SignIn extends Component {
             errorMessage,
             username,
             password,
-        } = this.state
+        } = this.state;
 
         // console.log("SIGN_IN_STATE", this.state)
         return (
-            <div className={css(styles.wrapper)}>
-                <div className={css(styles.body)}>
+            <div className="wrapper">
+                <div className="body">
                     <Form
-                        error={errorMessage}
+                        error={errorMessage ? true : false}
                         loading={loading}
                     >
                         <Message
@@ -124,21 +121,4 @@ class SignIn extends Component {
     }
 }
 
-const styles = StyleSheet.create({
-    wrapper: {
-        height: '100%',
-        weight: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    body: {
-        display: 'flex',
-        flexDirection: 'column',
-        border: '1px solid',
-        padding: 10,
-    }
-})
-
-export default withRouter(SignIn)
+export default SignIn
