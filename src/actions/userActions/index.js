@@ -1,7 +1,7 @@
 import {api} from '../../config'
-import {setTokenToLocalStorage} from '../localStorage'
-import { store } from '../../index'
-import { USER } from '../../reducers/const'
+import {deleteTokenFromLocalStorage, setTokenToLocalStorage} from '../localStorage'
+import {store} from '../../index'
+import {USER} from '../../reducers/const'
 
 export async function signIn(username, password) {
     let credentials = btoa(username + ':' + password);
@@ -12,11 +12,22 @@ export async function signIn(username, password) {
             'Authorization': basicAuth
         }
     });
-
     if (response.status !== 200) throw new Error('Some error');
+
     await setTokenToLocalStorage(response.data.user.api_key);
+    store.dispatch({
+        type: USER.SET_USER_INFO,
+        payload: response.data.user,
+    });
 
     return response.data
+}
+
+export async function signOut() {
+    await deleteTokenFromLocalStorage();
+    store.dispatch({
+        type: USER.UNSET_USER_INFO,
+    });
 }
 
 export async function getUserInfo(key) {
@@ -25,10 +36,9 @@ export async function getUserInfo(key) {
             key: key
         }
     });
-
     if (response.status !== 200) throw new Error('Some error');
-    let data = response.data.user;
 
+    let data = response.data.user;
     store.dispatch({
         type: USER.SET_USER_INFO,
         payload: data,

@@ -1,32 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //-------------redux
-import {createStore, applyMiddleware, compose} from 'redux'
+import { createStore } from 'redux'
 import {Provider} from 'react-redux'
 import reducers from './reducers'
-//-------------router
-// import createHistory from 'history/createBrowserHistory'
-// import {ConnectedRouter, routerMiddleware} from 'react-router-redux'
 //-------------styles
 import './index.css';
 import 'semantic-ui/dist/semantic.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'
 //-------------
 import * as serviceWorker from './serviceWorker';
 //-------------
 import Wrapper from './components/wrapper'
 //-------------
-// export const history = createHistory()
-// const middleware = routerMiddleware(history)
 
 export const store = createStore(
     reducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    // compose(applyMiddleware(middleware))
 )
 //-------------
 
 ReactDOM.render(
     <Provider store={store}>
+        <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={true}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnVisibilityChange
+            draggable={false}
+            pauseOnHover
+        />
         <Wrapper/>
     </Provider>
     , document.getElementById('root'));

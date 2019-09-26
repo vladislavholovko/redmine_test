@@ -1,14 +1,18 @@
 import React, {Component} from 'react'
+import {connect} from "react-redux";
+import {withRouter} from "react-router";
+import {Redirect} from 'react-router-dom';
 //-------------
 import * as userInfoActions from '../../actions/userActions/index'
 //-------------
+import './index.css';
+import {toast} from "react-toastify";
 import {
     Button,
     Input,
     Form,
     Message,
 } from 'semantic-ui-react'
-import './index.css';
 //-------------
 
 class SignIn extends Component {
@@ -18,7 +22,18 @@ class SignIn extends Component {
             loading: false,
             errorMessage: '',
             username: '',
-            password: ''
+            password: '',
+            redirectToHome: false,
+        }
+    }
+
+    componentDidMount = async () => {
+        let {userInfo} = this.props
+        if (userInfo.api_key) {
+            toast.info("You are already registered")
+            this.setState({
+                redirectToHome: true,
+            })
         }
     }
 
@@ -26,22 +41,31 @@ class SignIn extends Component {
         try {
             let {username, password} = this.state;
             username = username.trim();
-            if (!username)
-                return this.setState({errorMessage: "Enter username"});
-            if (!password)
-                return this.setState({errorMessage: "Enter password"});
+
+            if (!username) {
+                toast.warn("Enter a username")
+                return this.setState({errorMessage: "Enter a username"});
+            }
+            if (!password) {
+                toast.warn("Enter a password")
+                return this.setState({errorMessage: "Enter a password"});
+            }
+
             this.setState({
                 loading: true,
                 errorMessage: '',
             });
-            await userInfoActions.signIn(username, password);
-            this.setState({
-                loading: false,
-            });
-            this.props.history.push('/');
+            let response = await userInfoActions.signIn(username, password);
+            toast.success("You have been successfully authorized")
+            if (response){
+                this.setState({
+                    loading: false,
+                    redirectToHome: true,
+                });
+            }
         } catch (error) {
             this.setState({loading: false, errorMessage: error.message});
-            console.log(error)
+            toast.error(error.message)
         }
     };
 
@@ -57,7 +81,12 @@ class SignIn extends Component {
             errorMessage,
             username,
             password,
+            redirectToHome,
         } = this.state;
+
+        if (redirectToHome === true) {
+            return <Redirect to='/' />
+        }
 
         // console.log("SIGN_IN_STATE", this.state)
         return (
@@ -121,4 +150,6 @@ class SignIn extends Component {
     }
 }
 
-export default SignIn
+export default connect(state => ({
+    userInfo: state.user,
+}))(withRouter(SignIn))
