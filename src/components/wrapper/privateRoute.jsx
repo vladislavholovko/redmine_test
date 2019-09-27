@@ -1,16 +1,11 @@
 import React, {Component, Fragment} from 'react'
-import {Redirect, withRouter, Route} from 'react-router-dom';
 import {connect} from "react-redux";
-//-------------
-import { toast } from 'react-toastify'
+import {Redirect, withRouter, Route} from 'react-router-dom';
 //-------------
 
 class PrivateRoute extends Component {
     render() {
         let {userInfo} = this.props
-        /*if (!userInfo.api_key){
-            toast.warn("You now have access to this page")
-        }*/
 
         return (
             <Fragment>

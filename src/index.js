@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //-------------redux
-import { createStore } from 'redux'
+import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import reducers from './reducers'
 //-------------styles
 import './index.css';
 import 'semantic-ui/dist/semantic.min.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify'
+import {ToastContainer} from 'react-toastify'
 //-------------
 import * as serviceWorker from './serviceWorker';
 //-------------
 import Wrapper from './components/wrapper'
+import {BrowserRouter as Router} from "react-router-dom";
 //-------------
 
 export const store = createStore(
@@ -23,18 +24,20 @@ export const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={true}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnVisibilityChange
-            draggable={false}
-            pauseOnHover
-        />
-        <Wrapper/>
+        <Router>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={true}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnVisibilityChange
+                draggable={false}
+                pauseOnHover
+            />
+            <Wrapper/>
+        </Router>
     </Provider>
     , document.getElementById('root'));
 
