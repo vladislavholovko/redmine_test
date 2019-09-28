@@ -90,8 +90,8 @@ class SignIn extends Component {
 
         // console.log("SIGN_IN_STATE", this.state)
         return (
-            <div className="wrapper">
-                <div className="body">
+            <div className="signInWrapper">
+                <div className="signInBody">
                     <Form
                         error={errorMessage ? true : false}
                         loading={loading}

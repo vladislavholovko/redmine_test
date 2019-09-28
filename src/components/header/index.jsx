@@ -1,12 +1,10 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router'
 import {connect} from 'react-redux'
-import {
-    Menu
-} from 'semantic-ui-react'
-
+//-------------
+import {Menu} from 'semantic-ui-react'
+//-------------
 import * as userInfoActions from "../../actions/userActions";
-
 //-------------
 class HeaderBlock extends Component {
     constructor(props) {

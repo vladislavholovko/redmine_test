@@ -1,11 +1,11 @@
-export function getTokenFromLocalStorage() {
-    return localStorage.getItem('api_key')
+export function getTokenFromLocalStorage(type) {
+    return localStorage.getItem(type)
 }
 
-export function setTokenToLocalStorage(token) {
-    return localStorage.setItem('api_key', token)
+export function setTokenToLocalStorage(type, token) {
+    return localStorage.setItem(type, token)
 }
 
-export function deleteTokenFromLocalStorage() {
-    return localStorage.removeItem('api_key')
+export function deleteTokenFromLocalStorage(type) {
+    return localStorage.removeItem(type)
 }

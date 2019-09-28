@@ -2,17 +2,21 @@ import React, {Component} from 'react'
 import {Switch, Route} from 'react-router-dom';
 import {withRouter} from 'react-router'
 //-------------
-import {css, StyleSheet} from 'aphrodite'
 import {toast} from 'react-toastify'
+import './wrapperStyle.css'
 //-------------
 import {getTokenFromLocalStorage} from '../../actions/localStorage'
 import * as userInfoActions from "../../actions/userActions";
 //-------------
 import PrivateRoute from './privateRoute'
-import PageNotFound from "../pageNotFound/index";
+import PageNotFound from "../helpers/pageNotFound/index";
+import LoaderBlock from "../helpers/loading/index";
 import SignIn from "../signIn";
 import HeaderBlock from "../header";
-import ProjectBlock from "../project";
+import ProjectsBlock from "../projects/index";
+import ProjectInfo from "../projects/projectInfo";
+import IssuesBlock from "../issues/index";
+
 //-------------
 
 class Wrapper extends Component {
@@ -22,7 +26,7 @@ class Wrapper extends Component {
 
     componentDidMount = async () => {
         try {
-            let key = await getTokenFromLocalStorage()
+            let key = await getTokenFromLocalStorage("api_key")
             if (!key) return
             await userInfoActions.getUserInfo(key)
         } catch (e) {
@@ -40,30 +44,25 @@ class Wrapper extends Component {
         }
 
         return initialized ? (
-            <div className={css(styles.wrapper)}>
+            <div className="wrapperBlock">
                 {url === "/signIn" ?
                     <Route path="/signIn" component={SignIn}/>
                     :
-                    <div>
+                    <div className="authorizationBlock">
                         <HeaderBlock/>
                         <Switch>
-                            <PrivateRoute path="/project" component={ProjectBlock}/>
+                            <PrivateRoute exact path="/project" component={ProjectsBlock}/>
+                            <PrivateRoute path="/project/:id" component={ProjectInfo}/>
+                            <PrivateRoute path="/issues" component={IssuesBlock}/>
                             <PrivateRoute component={PageNotFound}/>
                         </Switch>
                     </div>
                 }
             </div>
         ) : (
-            <p>Loading...</p>
+            <LoaderBlock/>
         )
     }
 }
-
-const styles = StyleSheet.create({
-    wrapper: {
-        height: '100%',
-        weight: '100%',
-    }
-})
 
 export default withRouter(Wrapper)

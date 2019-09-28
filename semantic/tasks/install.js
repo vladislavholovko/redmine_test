@@ -101,7 +101,7 @@ if(currentConfig && manager.name === 'NPM') {
     }
   ;
 
-  // duck-type if there is a project installed
+  // duck-type if there is a projects installed
   if( fs.existsSync(updatePaths.definition) ) {
 
     // perform update if new version
@@ -255,7 +255,7 @@ gulp.task('create install files', function(callback) {
     // Set root to custom root path if set
     if(answers.customRoot) {
       if(answers.customRoot === '') {
-        console.log('Unable to proceed, invalid project root');
+        console.log('Unable to proceed, invalid projects root');
         return;
       }
       manager.root = answers.customRoot;
@@ -271,13 +271,13 @@ gulp.task('create install files', function(callback) {
       themeImport  : folders.themeImport
     });
 
-    // add project root to semantic root
+    // add projects root to semantic root
     installFolder = path.join(manager.root, answers.semanticRoot);
 
     // add install folder to all output paths
     for(var destination in installPaths) {
       if( installPaths.hasOwnProperty(destination) ) {
-        // config goes in project root, rest in install folder
+        // config goes in projects root, rest in install folder
         installPaths[destination] = (destination == 'config' || destination == 'configFolder')
           ? path.normalize( path.join(manager.root, installPaths[destination]) )
           : path.normalize( path.join(installFolder, installPaths[destination]) )
@@ -285,7 +285,7 @@ gulp.task('create install files', function(callback) {
       }
     }
 
-    // create project folders
+    // create projects folders
     try {
       mkdirp.sync(installFolder);
       mkdirp.sync(installPaths.definition);

@@ -282,7 +282,7 @@ module.exports = {
         type    : 'list',
         name    : 'useRoot',
         message :
-          '{packageMessage} Is this your project folder? {root}',
+          '{packageMessage} Is this your projects folder? {root}',
         choices: [
           {
             name  : 'Yes',
@@ -297,14 +297,14 @@ module.exports = {
       {
         type    : 'input',
         name    : 'customRoot',
-        message : 'Please enter the absolute path to your project root',
-        default : '/my/project/path',
+        message : 'Please enter the absolute path to your projects root',
+        default : '/my/projects/path',
         when    : when.changeRoot
       },
       {
         type    : 'input',
         name    : 'semanticRoot',
-        message : 'Where should we put Semantic UI inside your project?',
+        message : 'Where should we put Semantic UI inside your projects?',
         default : 'semantic/'
       }
     ],
