@@ -5,10 +5,10 @@ import {getTokenFromLocalStorage} from "../localStorage";
 //-------------
 import {PROJECTS} from "../../reducers/const";
 //-------------
-const key =  getTokenFromLocalStorage("api_key")
-//-------------
 
 export async function getAllProjects() {
+    const key =  getTokenFromLocalStorage("api_key")
+
     let response = await api.get(`/projects.json`, {
         params: {
             key: key
@@ -24,6 +24,8 @@ export async function getAllProjects() {
 }
 
 export async function getProject(projecId) {
+    const key =  getTokenFromLocalStorage("api_key")
+
     let response = await api.get(`/projects/${projecId}.json?include=trackers,issue_categories,enabled_modules,time_entry_activities`, {
         params: {
             key: key

@@ -556,7 +556,7 @@ $.fn.sticky = function(parameters) {
             }
             else if( module.is.bottom() ) {
               if( scroll.top <= element.top ) {
-                module.debug('Jumped from bottom fixed to top fixed, most likely used pageNotFound/end button');
+                module.debug('Jumped from bottom fixed to top fixed, most likely used notFoundBlocks/end button');
                 module.setInitialPosition();
               }
               else {

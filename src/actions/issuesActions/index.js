@@ -5,11 +5,22 @@ import {getTokenFromLocalStorage} from "../localStorage";
 //-------------
 import {ISSUES} from "../../reducers/const";
 //-------------
-const key = getTokenFromLocalStorage("api_key")
-//-------------
 
-export async function getAllIssues(limit, page) {
-    let response = await api.get(`/issues.json?page=${page},limit=${limit}`, {
+export async function getAllIssues(limit, page, project) {
+    const key = getTokenFromLocalStorage("api_key")
+
+    let url = '/issues.json?'
+    if (page) {
+        url += `page=${page}`
+    }
+    if (limit) {
+        url += `&limit=${limit}`
+    }
+    if (project) {
+        url += `&project_id=${project}`
+    }
+
+    let response = await api.get(url, {
         params: {
             key: key
         },

@@ -15,7 +15,6 @@ class HeaderBlock extends Component {
     }
 
     handleItemClick = (e, {name}) => {
-        this.setState({activeItem: name})
         this.props.history.push(`/${name}`)
     }
 
@@ -26,7 +25,7 @@ class HeaderBlock extends Component {
 
     render() {
         let {userInfo} = this.props
-        let {activeItem} = this.state
+        let activeItem = this.props.location.pathname.substring(1)
 
         return (
             <div>

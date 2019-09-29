@@ -9,14 +9,13 @@ import {getTokenFromLocalStorage} from '../../actions/localStorage'
 import * as userInfoActions from "../../actions/userActions";
 //-------------
 import PrivateRoute from './privateRoute'
-import PageNotFound from "../helpers/pageNotFound/index";
+import PageNotFound from "../helpers/notFoundBlocks/pageNotFoind";
 import LoaderBlock from "../helpers/loading/index";
 import SignIn from "../signIn";
 import HeaderBlock from "../header";
 import ProjectsBlock from "../projects/index";
 import ProjectInfo from "../projects/projectInfo";
 import IssuesBlock from "../issues/index";
-
 //-------------
 
 class Wrapper extends Component {
@@ -39,7 +38,7 @@ class Wrapper extends Component {
     render() {
         const {initialized} = this.state
         let url = this.props.location.pathname
-        if (url === '/') {
+        if (!url || url === '/') {
             this.props.history.push('/project')
         }
 

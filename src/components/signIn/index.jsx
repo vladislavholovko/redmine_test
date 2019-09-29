@@ -85,10 +85,9 @@ class SignIn extends Component {
         } = this.state;
 
         if (redirectToHome === true) {
-            return <Redirect to='/' />
+            return <Redirect to='/project' />
         }
 
-        // console.log("SIGN_IN_STATE", this.state)
         return (
             <div className="signInWrapper">
                 <div className="signInBody">

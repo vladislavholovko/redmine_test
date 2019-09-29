@@ -1,14 +1,16 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {Link} from 'react-router-dom'
 //-------------
 import {toast} from "react-toastify";
 import {Table} from 'semantic-ui-react'
+import './projects.css'
 //-------------
 import * as ProjectActions from '../../actions/projectActions/index'
 //-------------
 import LoaderBlock from "../helpers/loading";
+import InfoNotFound from "../helpers/notFoundBlocks/infoNotFound"
 //-------------
 
 class ProjectsBlock extends Component {
@@ -38,21 +40,11 @@ class ProjectsBlock extends Component {
         let {projects} = this.props
         let {loading} = this.state
 
-        console.log("LIST_PROJECTS_PROPS", this.props)
-
-        /*id(pin):891
-        name(pin):"GigX (Fractional CXO)"
-        identifier(pin):"fractional-cxo"
-        description(pin):"Drupal 8 website"
-        status(pin):1
-        created_on(pin):"2018-03-28T06:40:43Z"
-        updated_on(pin):"2018-05-30T12:43:23Z"*/
-
         return (
             !loading ?
-                <div>
+                <Fragment>
                     {projects && projects.length > 0 ?
-                        <div>
+                        <div className='listProjectsBlock'>
                             <Table celled inverted selectable>
                                 <Table.Header>
                                     <Table.Row>
@@ -78,8 +70,8 @@ class ProjectsBlock extends Component {
                                     )}
                                 </Table.Body>
                             </Table>
-                        </div> : <div>LIST PROJECTS NOT FOUND</div>}
-                </div> :
+                        </div> : <InfoNotFound text="list project not found"/>}
+                </Fragment> :
                 <LoaderBlock/>
         )
     }

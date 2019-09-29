@@ -4,32 +4,54 @@ import {withRouter} from 'react-router'
 import {Link} from 'react-router-dom'
 //-------------
 import {toast} from "react-toastify";
-import {Table} from 'semantic-ui-react'
+import {Table, Select} from 'semantic-ui-react'
+import './issues.css'
 //-------------
 import * as IssuesActions from '../../actions/issuesActions/index'
+import * as ProjectActions from "../../actions/projectActions";
 //-------------
 import Pagination from '../helpers/pagination/pagination'
 import LoaderBlock from "../helpers/loading";
+import InfoNotFound from "../helpers/notFoundBlocks/infoNotFound";
+import LimitList from "../helpers/limitList/index"
 //-------------
 
 class IssuesBlock extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: true,
-            limit: 25,
+            loading: false,
             page: 1,
+            selectedProject: 'all'
         }
     }
 
     componentDidMount = async () => {
         await this.loadIssues()
+        await this.loadProjects()
     }
 
-    loadIssues = async () => {
+    loadIssues = async (resetPage) => {
         try {
-            let {limit, page} = this.state
-            await IssuesActions.getAllIssues(limit, page)
+            this.setState({loading: true})
+            let {page, selectedProject} = this.state
+            let {limit} = this.props
+
+            if (resetPage) page = 1
+            if (selectedProject === 'all') selectedProject = null
+
+            await IssuesActions.getAllIssues(limit, page, selectedProject)
+            this.setState({loading: false, page})
+        } catch (error) {
+            this.setState({loading: false,});
+            toast.error(error.message)
+        }
+    }
+
+    loadProjects = async () => {
+        try {
+            this.setState({loading: true})
+            await ProjectActions.getAllProjects()
             this.setState({loading: false})
         } catch (error) {
             this.setState({loading: false,});
@@ -38,43 +60,40 @@ class IssuesBlock extends Component {
     }
 
     onChangePage = async (page) => {
-        try {
-            this.setState({loading: true})
-            let {limit} = this.state
-            await IssuesActions.getAllIssues(limit, page)
-            this.setState({loading: false, page})
-        } catch (error) {
-            this.setState({loading: false,});
-            toast.error(error.message)
-        }
+        await this.setState({page})
+        await this.loadIssues(false)
+    }
+
+    selectedProject = async (selectedProject) => {
+        await this.setState({selectedProject})
+        await this.loadIssues(true)
     }
 
     render() {
-        let {issues} = this.props
-        let {loading, limit, page} = this.state
-        let ListIssues = issues.issues
-        console.log("LIST_ISSUES_PROPS", this.props)
+        let {issues, projects, limit} = this.props
+        let {loading, page, selectedProject} = this.state
 
-        /*   assigned_to: {id: 392, name: "Artem Kravchenko"}
-           author: {id: 392, name: "Artem Kravchenko"}
-           created_on: "2019-09-03T07:33:18Z"
-           custom_fields: [{…}]
-           description: ""
-           done_ratio: 0
-           id: 57433
-           priority: {id: 2, name: "Normal"}
-           project: {id: 891, name: "GigX (Fractional CXO)"}
-           start_date: "2019-08-30"
-           status: {id: 1, name: "New"}
-           subject: "Transfer data to analytics after payment"
-           tracker: {id: 4, name: "Task"}
-           updated_on: "2019-09-03T07:33:18Z"*/
+        let ListIssues = issues.issues
+        let optionListProject = [{value: 'all', text: 'All'}]
+        projects.map(project =>
+            optionListProject.push({value: project.id, text: project.name}))
 
         return (
             !loading ?
-                <div>
+                <div className='listIssuesBlock'>
                     {ListIssues && ListIssues.length > 0 ?
                         <div>
+                            <div>
+                                <Select
+                                    fluid
+                                    value={selectedProject}
+                                    options={optionListProject}
+                                    placeholder="Project List"
+                                    onChange={(e, {value}) => this.selectedProject(value)}
+                                />
+                                <LimitList onChange={this.loadIssues}/>
+                            </div>
+
                             <Table celled inverted selectable>
                                 <Table.Header>
                                     <Table.Row>
@@ -119,7 +138,7 @@ class IssuesBlock extends Component {
                                 totalCount={issues.total_count}
                                 onChangePage={this.onChangePage}
                             />
-                        </div> : <div>LIST iSSUES NOT FOUND</div>}
+                        </div> : <InfoNotFound text="list issues not found"/>}
                 </div> :
                 <LoaderBlock/>
         )
@@ -128,4 +147,6 @@ class IssuesBlock extends Component {
 
 export default connect(state => ({
     issues: state.issues,
+    limit: state.limit.limit,
+    projects: state.projects.projects
 }))(withRouter(IssuesBlock))
