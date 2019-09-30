@@ -1,15 +1,14 @@
 .signInWrapper {
-    height: 100%;
-    weight: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center
+  height: 100%;
+  weight: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .signInBody {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #000;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000;
+  padding: 10px;
 }
-

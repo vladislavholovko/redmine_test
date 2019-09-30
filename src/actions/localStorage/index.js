@@ -1,11 +1,11 @@
 export function getTokenFromLocalStorage(type) {
-    return localStorage.getItem(type)
+  return localStorage.getItem(type);
 }
 
 export function setTokenToLocalStorage(type, token) {
-    return localStorage.setItem(type, token)
+  return localStorage.setItem(type, token);
 }
 
 export function deleteTokenFromLocalStorage(type) {
-    return localStorage.removeItem(type)
+  return localStorage.removeItem(type);
 }
