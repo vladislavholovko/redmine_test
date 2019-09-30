@@ -4,7 +4,7 @@ import { withRouter } from "react-router";
 //-------------
 import { Button } from "semantic-ui-react";
 //-------------
-import * as LimitActions from "../../../actions/limitListAction/index";
+import * as LimitActions from "../../../../actions/limitListAction";
 //-------------
 
 class LimitList extends Component {

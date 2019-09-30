@@ -3,13 +3,13 @@ import { store } from "../../index";
 //-------------
 import { getTokenFromLocalStorage } from "../localStorage";
 //-------------
-import { ISSUES } from "../../reducers/const";
+import { SPENT_TIME } from "../../reducers/const";
 //-------------
 
-export async function getAllIssues(limit, page, project) {
+export async function getAllSpentTime(limit, page, project, issueId) {
   const key = getTokenFromLocalStorage("api_key");
 
-  let url = "/issues.json?";
+  let url = "/time_entries.json?";
   if (page) {
     url += `page=${page}`;
   }
@@ -18,6 +18,10 @@ export async function getAllIssues(limit, page, project) {
   }
   if (project) {
     url += `&project_id=${project}`;
+  }
+
+  if (issueId){
+    url += `&issue_id=${issueId}`;
   }
 
   let response = await api.get(url, {
@@ -29,7 +33,7 @@ export async function getAllIssues(limit, page, project) {
   if (response.status !== 200) throw new Error("Some error");
 
   store.dispatch({
-    type: ISSUES.SET_ISSUES_LIST,
+    type: SPENT_TIME.SET_SPENT_TIME,
     payload: response.data
   });
 }

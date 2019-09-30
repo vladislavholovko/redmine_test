@@ -11,6 +11,10 @@ export const ISSUES = {
   SET_ISSUES_LIST: "SET_ISSUES_LIST"
 };
 
+export const SPENT_TIME = {
+  SET_SPENT_TIME: "SET_SPENT_TIME"
+};
+
 export const LIMIT = {
   SET_LIMIT: "SET_LIMIT"
 };
