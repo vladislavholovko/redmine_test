@@ -5,11 +5,7 @@ import { withRouter } from "react-router";
 import * as CommentActions from "../../../actions/comments";
 //-------------
 import { toast } from "react-toastify";
-import {
-  Button,
-  Form,
-  TextArea
-} from "semantic-ui-react";
+import { Form, Icon, Input } from "semantic-ui-react";
 //-------------
 
 class CreateCommentBlock extends Component {
@@ -28,7 +24,7 @@ class CreateCommentBlock extends Component {
       let user = {
         id: userInfo.id,
         firstname: userInfo.firstname,
-        lastname: userInfo.lastname
+        lastname: userInfo.lastname,
       };
 
       this.setState({ loading: true });
@@ -36,7 +32,7 @@ class CreateCommentBlock extends Component {
         throw new Error("Comment empty");
       }
 
-			await CommentActions.createComment(typeComment, valueId, comment, user);
+      await CommentActions.createComment(typeComment, valueId, comment, user);
 
       this.setState({ loading: false, comment: "" });
     } catch (error) {
@@ -51,30 +47,28 @@ class CreateCommentBlock extends Component {
 
   render() {
     let { loading, comment } = this.state;
-    // console.log("CREATE_COMMENTS_BLOCK_STATE", this.state);
 
     return (
       <div>
-        <Form loading={loading}>
+        <Form loading={loading} onSubmit={() => this.onCreateComment()}>
           <Form.Field>
-            <label>Comment</label>
-            <TextArea
-              fluid="true"
-              placeholder="Comment"
-              rows={5}
+            <Input
+              icon
+              placeholder="Create comment"
               value={comment}
-              onChange={(e, data) => this.onChangeComment(data.value)}
-            />
+              onChange={e => this.onChangeComment(e.target.value)}
+            >
+              <input />
+              <Icon
+                name="chevron circle right"
+                size="large"
+                link
+                onClick={() => {
+                  this.onCreateComment();
+                }}
+              />
+            </Input>
           </Form.Field>
-
-          <Button
-            children="Send"
-            primary
-            fluid
-            size="large"
-            onClick={() => this.onCreateComment()}
-            type="submit"
-          />
         </Form>
       </div>
     );

@@ -4,13 +4,10 @@ import { COMMENTS } from "../../reducers/const";
 //-------------
 import { setTokenToLocalStorage } from "../localStorage";
 //-------------
+import moment from "moment";
+//-------------
 
 export async function createComment(typeComment, valueId, comment, user) {
-  console.log("typeComment", typeComment);
-  console.log("valueId", valueId);
-  console.log("comment", comment);
-  console.log("user", user);
-
   let storeInfo = JSON.parse(JSON.stringify(store.getState().comments));
 
   let commentObject = {};
@@ -18,6 +15,7 @@ export async function createComment(typeComment, valueId, comment, user) {
   commentObject.id = valueId;
   commentObject.comment = comment;
   commentObject.user = user;
+  commentObject.dataCreate = moment();
 
   let massiveComment =
     typeComment === "project"

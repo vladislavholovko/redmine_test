@@ -3,3 +3,148 @@
   padding: 10px;
   overflow: auto;
 }
+
+.projectInfoBlock {
+}
+
+/*-------------*/
+
+.projectInfoBlockTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.projectInfoBlockTitle b {
+  margin: 10px;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.projectInfoBlockTitle p {
+  margin-bottom: 10px;
+  font-size: 17px;
+  text-align: center;
+  font-family: "Pacifico", cursive;
+}
+
+/*-------------*/
+
+.totalCountLength {
+  display: flex;
+}
+
+.totalCountLength p {
+  font-size: 14px;
+  font-family: "Pacifico", cursive;
+}
+
+.totalCountLength b {
+  font-size: 16px;
+  font-weight: 900;
+  margin-left: 5px;
+}
+
+/*-------------*/
+
+.projectInfoAboutSomeIssueWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.projectInfoAboutSomeIssueBlock {
+  display: flex;
+  width: 330px;
+  flex-direction: column;
+  padding: 10px;
+  margin: 20px;
+  border: 2px solid rgba(53, 53, 53, 0.8);
+  border-radius: 10px;
+  background: rgba(53, 53, 53, 0.5);
+}
+
+.projectInfoAboutSomeIssueBlock:hover {
+  background: rgba(53, 53, 53, 0.7);
+}
+
+.projectInfoAboutSomeIssueBlockId {
+  display: flex;
+  margin-bottom: 5px;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Pacifico", cursive;
+  cursor: pointer;
+}
+
+.projectInfoAboutSomeIssueBlockData {
+  display: flex;
+  justify-content: flex-end;
+  color: gray;
+  margin-bottom: 5px;
+  font-size: 10px;
+}
+
+.projectInfoAboutSomeIssueBlockStatus {
+  display: flex;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+}
+
+.projectInfoAboutSomeIssueBlockStatus div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 1px solid rgba(53, 53, 53, 1);
+}
+
+.projectInfoAboutSomeIssueBlockStatus div div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(53, 53, 53, 0.8);
+  font-weight: 600;
+}
+
+.projectInfoAboutSomeIssueBlockStatus div div:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(53, 53, 53, 0.2);
+  font-family: "Pacifico", cursive;
+}
+
+.projectInfoAboutSomeIssueBlockUsers {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+
+}
+
+.projectInfoAboutSomeIssueBlockUsers div:first-child {
+  font-weight: 600;
+  padding-right: 5px;
+}
+
+.projectInfoAboutSomeIssueBlockUsers div:last-child {
+  font-family: "Pacifico", cursive;
+}
+
+.projectInfoAboutSomeIssueBlockSubject {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px dotted rgba(53, 53, 53, 1);
+}
+
+.projectInfoAboutSomeIssueBlockSubject div:first-child {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 600;
+  padding-right: 5px;
+}
+
+.projectInfoAboutSomeIssueBlockSubject div:last-child {
+  font-family: "Pacifico", cursive;
+}

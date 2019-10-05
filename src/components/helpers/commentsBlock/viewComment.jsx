@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 //-------------
+import { Icon } from "semantic-ui-react";
+//-------------
 import InfoNotFound from "../notFoundBlocks/infoNotFound";
+//-------------
+import moment from "moment";
 //-------------
 
 class ViewComments extends Component {
   render() {
-    // console.log("VIEW_COMMENTS_BLOCK_PROPS", this.props);
     let { allComments, typeComment, valueId } = this.props;
 
     let comments =
@@ -19,16 +22,23 @@ class ViewComments extends Component {
     comments = comments.filter(val => val.id === valueId);
 
     return (
-      <div>
+      <div className="viewCommentBlock">
         {comments && comments.length > 0 ? (
           comments.map(comment => {
             return (
-              <div key={`${comment.type}№${comment.id}_comment`}>
-                <div>
-                  <b>{comment.user.firstname}</b>
-                  <b>{comment.user.lastname}</b>
+              <div key={`${comment.type}№${comment.id}_comment`} className="viewCommentBlockSomeComment">
+                <div className="viewCommentBlockSomeCommentUser">
+                  <Icon name="bug" color="green" />
+                  <div>
+                    <b>{comment.user.firstname}</b>
+                    <b>{comment.user.lastname}</b>
+                  </div>
+                  <div className='commentDataCreate'>
+                    ({moment(comment.dataCreate).format("YYYY-MM-DD HH:MM")})
+                  </div>
                 </div>
-                <div>
+
+                <div className="viewCommentBlockSomeCommentText">
                   <p>{comment.comment}</p>
                 </div>
               </div>

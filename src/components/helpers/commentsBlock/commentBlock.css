@@ -1,0 +1,34 @@
+.commentBlockWrapper {
+	padding: 10px;
+	border: 2px solid rgba(155, 155, 155, 0.2);
+	background: rgba(175, 175, 175, 0.2);
+	border-radius: 10px;
+	margin: 5px 0;
+}
+
+.viewCommentBlock {
+	margin-bottom: 10px;
+}
+
+.viewCommentBlockSomeComment {
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+}
+
+.viewCommentBlockSomeCommentUser {
+	display: flex;
+	margin-bottom: 5px;
+}
+
+.viewCommentBlockSomeCommentText {
+	margin-left: 20px;
+	font-family: "Pacifico", cursive;
+}
+
+.commentDataCreate {
+	font-size: 10px;
+	color: gray;
+	margin-left: 10px;
+}
+

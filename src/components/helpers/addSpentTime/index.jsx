@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 //-------------
 import { toast } from "react-toastify";
-import { Input, Modal, Button, TextArea, Select } from "semantic-ui-react";
+import {
+  Input,
+  Modal,
+  Button,
+  TextArea,
+  Select,
+  Icon
+} from "semantic-ui-react";
 import "./spentTime.css";
 //-------------
 import NumberFormat from "react-number-format";
@@ -57,7 +64,7 @@ class NewSpentTimeModal extends Component {
     let { timeObject } = this.state;
     let { issueId, projectId } = this.props;
     try {
-      this.setState({error: ''})
+      this.setState({ error: "" });
       if (!timeObject.spent_on) {
         this.setState({
           error: "Data value is required"
@@ -104,7 +111,17 @@ class NewSpentTimeModal extends Component {
     return (
       <Modal
         trigger={
-          <Button onClick={() => this.onOpenModal()} content="Add time" />
+          <Button
+            icon
+            onClick={() => this.onOpenModal()}
+            color="grey"
+            circular
+            labelPosition="right"
+            size="mini"
+          >
+            Add time
+            <Icon name="plus" />
+          </Button>
         }
         open={openModal}
         onClose={() => this.onCloseModal()}

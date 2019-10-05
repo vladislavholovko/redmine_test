@@ -6,11 +6,12 @@ import * as ProjectActions from "../../actions/projectActions/index";
 import * as IssuesActions from "../../actions/issuesActions";
 //-------------
 import { toast } from "react-toastify";
-import { Table } from "semantic-ui-react";
+import "./projects.css";
 //-------------
 import LoaderBlock from "../helpers/loading";
 import InfoNotFound from "../helpers/notFoundBlocks/infoNotFound";
 import NewSpentTimeModal from "../helpers/addSpentTime";
+import ProjectInfoIssueList from "./projectInfoIssueList";
 import CommentsBlock from "../helpers/commentsBlock";
 import LimitList from "../helpers/filterBlocks/limitList";
 import Pagination from "../helpers/filterBlocks/pagination/pagination";
@@ -85,76 +86,43 @@ class ProjectInfo extends Component {
     let ListIssues = issues.issues;
 
     return !loading ? (
-      <div>
+      <div className="listProjectsBlock">
         {project ? (
-          <div>
-            <p>{project.name}</p>
-            <i>{project.description}</i>
-            <div className="listIssuesBlock">
-              <NewSpentTimeModal projectId={project.id}/>
+          <div className="projectInfoBlock">
+            <div className="projectInfoBlockTitle">
+              <b>{project.name}</b>
+              <p>{project.description}</p>
+            </div>
+            {ListIssues && ListIssues.length > 0 ? (
               <div>
-                {issues && issues.total_count && (
-                  <i>Issues Count {issues.total_count}</i>
-                )}
-              </div>
-              {ListIssues && ListIssues.length > 0 ? (
-                <div>
+                <div className="filterComponentInputs">
+                  {issues && issues.total_count && (
+                    <div className="totalCountLength">
+                      <p>Issues Count:</p> <b>{issues.total_count}</b>
+                    </div>
+                  )}
+                  <NewSpentTimeModal projectId={project.id} />
                   <LimitList onChange={this.loadIssues} />
-                  <Table celled selectable>
-                    <Table.Header>
-                      <Table.Row>
-                        <Table.HeaderCell>#</Table.HeaderCell>
-                        <Table.HeaderCell>Tracker</Table.HeaderCell>
-                        <Table.HeaderCell>Status</Table.HeaderCell>
-                        <Table.HeaderCell>Priority</Table.HeaderCell>
-                        <Table.HeaderCell>Subject</Table.HeaderCell>
-                        <Table.HeaderCell>Author</Table.HeaderCell>
-                        <Table.HeaderCell>Assignee</Table.HeaderCell>
-                        <Table.HeaderCell>Updated</Table.HeaderCell>
-                      </Table.Row>
-                    </Table.Header>
-
-                    <Table.Body>
-                      {ListIssues.map(issue => (
-                        <Table.Row
-                          key={`project=${project.id}_issue_id:${issue.id}`}
-                          onClick={() => this.onRedirectToIssueInfo(issue.id)}
-                        >
-                          <Table.Cell>{issue.id}</Table.Cell>
-                          <Table.Cell>{issue.tracker.name}</Table.Cell>
-                          <Table.Cell textAlign="right">
-                            {issue.status.name}
-                          </Table.Cell>
-                          <Table.Cell textAlign="right">
-                            {issue.priority.name}
-                          </Table.Cell>
-                          <Table.Cell textAlign="right">
-                            {issue.subject}
-                          </Table.Cell>
-                          <Table.Cell textAlign="right">
-                            {issue.author.name}
-                          </Table.Cell>
-                          <Table.Cell textAlign="right">
-                            {issue.assigned_to && issue.assigned_to.name}
-                          </Table.Cell>
-                          <Table.Cell textAlign="right">
-                            {issue.created_on}
-                          </Table.Cell>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table>
+                </div>
+                <div>
+                  <ProjectInfoIssueList
+                    projectId={project.id}
+                    ListIssues={ListIssues}
+                    onRedirectToIssueInfo={this.onRedirectToIssueInfo}
+                  />
                   <Pagination
                     page={page}
                     totalCount={issues.total_count}
                     onChangePage={this.onChangeFilter}
                   />
                 </div>
-              ) : (
-                <InfoNotFound text="list issues not found" />
-              )}
-            </div>
-            <CommentsBlock typeComment="project" valueId={project.id}/>
+
+              </div>
+            ) : (
+              <InfoNotFound text="list issues not found" />
+            )}
+
+            <CommentsBlock typeComment="project" valueId={project.id} />
           </div>
         ) : (
           <InfoNotFound text="project not found" />
