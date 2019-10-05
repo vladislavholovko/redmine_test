@@ -1,0 +1,39 @@
+.modal_content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_content_info {
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.modal_content_block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal_content_block_input {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.modal_content_block_input label{
+	margin-bottom: 5px;
+	font-weight: 900;
+}
+
+.modal_header {
+	text-align: center;
+}
+
+.modal_button_segment {
+
+}
+
+.modal_content_error {
+	color: red;
+
+}

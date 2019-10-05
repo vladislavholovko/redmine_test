@@ -85,10 +85,9 @@ class SignIn extends Component {
 
     return (
       <div className="signInWrapper">
-        <div className="signInBody">
-          <Form error={errorMessage ? true : false} loading={loading}>
-            <Message error content={errorMessage} />
-            <Form.Field>
+          <Form  className="signInBody" error={errorMessage ? true : false} loading={loading}>
+            <Message className="signInErrorBlock" error content={errorMessage} />
+            <Form.Field className="signInTextInput">
               <label>Username</label>
               <Input
                 name="login"
@@ -101,11 +100,9 @@ class SignIn extends Component {
                   this.onChangeForm("username", data.value)
                 }
                 value={username}
-                label={{ icon: "asterisk" }}
-                labelPosition="right corner"
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field className="signInTextInput">
               <label>Password</label>
               <Input
                 name="password"
@@ -119,8 +116,6 @@ class SignIn extends Component {
                   this.onChangeForm("password", data.value)
                 }
                 value={password}
-                label={{ icon: "asterisk" }}
-                labelPosition="right corner"
               />
             </Form.Field>
             <Button
@@ -132,7 +127,7 @@ class SignIn extends Component {
               type="submit"
             />
           </Form>
-        </div>
+
       </div>
     );
   }

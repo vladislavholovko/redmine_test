@@ -5,19 +5,20 @@ import { USER } from "../../reducers/const";
 //-------------
 import {
   deleteTokenFromLocalStorage,
+  getTokenFromLocalStorage,
   setTokenToLocalStorage
 } from "../localStorage";
 //-------------
 
 export async function signIn(username, password) {
+  let url = "/users/current.json";
+
   let credentials = btoa(username + ":" + password);
   let basicAuth = "Basic " + credentials;
-
-  let response = await api.get(`/users/current.json`, {
-    headers: {
-      Authorization: basicAuth
-    }
-  });
+  let headers = {
+    Authorization: basicAuth
+  };
+  let response = await api.get(url, { headers });
   if (response.status !== 200) throw new Error("Some error");
 
   await setTokenToLocalStorage("api_key", response.data.user.api_key);
@@ -37,11 +38,13 @@ export async function signOut() {
 }
 
 export async function getUserInfo(key) {
-  let response = await api.get(`/users/current.json`, {
-    params: {
-      key: key
-    }
-  });
+  let url = "/users/current.json";
+
+  let params = {};
+  params.key = key;
+
+  let response = await api.get(url, { params });
+
   if (response.status !== 200) throw new Error("Some error");
 
   let data = response.data.user;

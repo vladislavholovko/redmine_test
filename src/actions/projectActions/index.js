@@ -7,13 +7,13 @@ import { PROJECTS } from "../../reducers/const";
 //-------------
 
 export async function getAllProjects() {
+  let url = "/projects.json";
   const key = getTokenFromLocalStorage("api_key");
 
-  let response = await api.get(`/projects.json`, {
-    params: {
-      key: key
-    }
-  });
+  let params = {};
+  params.key = key;
+
+  let response = await api.get(url, { params });
 
   if (response.status !== 200) throw new Error("Some error");
 
@@ -24,16 +24,13 @@ export async function getAllProjects() {
 }
 
 export async function getProject(projecId) {
+  let url = `/projects/${projecId}.json?include=trackers,issue_categories,enabled_modules,time_entry_activities`;
   const key = getTokenFromLocalStorage("api_key");
 
-  let response = await api.get(
-    `/projects/${projecId}.json?include=trackers,issue_categories,enabled_modules,time_entry_activities`,
-    {
-      params: {
-        key: key
-      }
-    }
-  );
+  let params = {};
+  params.key = key;
+
+  let response = await api.get(url, { params });
 
   if (response.status !== 200) throw new Error("Some error");
 

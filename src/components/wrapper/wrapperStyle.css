@@ -1,6 +1,10 @@
 .wrapperBlock {
   height: 100%;
-  weight: 100%;
+  width: 100%;
+  background-image: url("../../sources/background.jpg");
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-size: cover;
 }
 
 .authorizationBlock {

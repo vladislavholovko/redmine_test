@@ -14,18 +14,40 @@ class Pagination extends Component {
     return (
       <div className="pagination">
         <Button
+          size="mini"
+          color="grey"
           disabled={page === 1}
+          circular
           onClick={() => onChangePage("page", page - 1, false)}
           icon="angle left"
         />
         {page - 1 > 0 ? (
-          <Button onClick={() => onChangePage("page", page - 1, false)}>{page - 1}</Button>
+          <Button
+            size="mini"
+            color="grey"
+            circular
+            onClick={() => onChangePage("page", page - 1, false)}
+          >
+            {page - 1}
+          </Button>
         ) : null}
-        <Button primary>{page}</Button>
+        <Button circular primary size="mini">
+          {page}
+        </Button>
         {page + 1 <= totalPages ? (
-          <Button onClick={() => onChangePage("page", page + 1, false)}>{page + 1}</Button>
+          <Button
+            size="mini"
+            color="grey"
+            circular
+            onClick={() => onChangePage("page", page + 1, false)}
+          >
+            {page + 1}
+          </Button>
         ) : null}
         <Button
+          size="mini"
+          color="grey"
+          circular
           disabled={totalPages < 2 || page === totalPages}
           onClick={() => onChangePage("page", page + 1, false)}
           icon="angle right"

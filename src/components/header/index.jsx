@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 //-------------
-import { Menu } from "semantic-ui-react";
-//-------------
 import * as userInfoActions from "../../actions/userActions";
 //-------------
+import { Menu, Icon } from "semantic-ui-react";
+import './header.css'
+//-------------
+
 class HeaderBlock extends Component {
   constructor(props) {
     super(props);
@@ -59,7 +61,9 @@ class HeaderBlock extends Component {
               name="logout"
               active={activeItem === "logout"}
               onClick={this.logOut}
-            />
+            >
+              <Icon name='sign-out' size="large" />
+            </Menu.Item>
           </Menu.Menu>
         </Menu>
       </div>

@@ -3,17 +3,18 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 //-------------
+import * as TimeActions from "../../actions/spentTimeActions/index";
+//-------------
 import { toast } from "react-toastify";
 import { Table } from "semantic-ui-react";
-//-------------
-import * as TimeActions from "../../actions/spentTimeActions/index";
 //-------------
 import Pagination from "../helpers/filterBlocks/pagination/pagination";
 import LoaderBlock from "../helpers/loading";
 import InfoNotFound from "../helpers/notFoundBlocks/infoNotFound";
 import LimitList from "../helpers/filterBlocks/limitList/index";
 import ProjectSelect from "../helpers/filterBlocks/projectSelect";
-import IssueFilter from "../helpers/filterBlocks/issueFilter";
+import InputFilter from "../helpers/filterBlocks/inputFilter";
+import moment from "moment";
 //-------------
 
 class SpentTimeBlock extends Component {
@@ -65,50 +66,74 @@ class SpentTimeBlock extends Component {
 
     return !loading ? (
       <div className="listIssuesBlock">
-        <div>
-          <ProjectSelect
-            selectedProject={selectedProject}
-            onSelectedProject={this.onChangeFilter}
-          />
-          <IssueFilter
-            issueId={issueId}
-            onLoad={this.loadSpentTime}
-            onChangeIssue={this.onChangeFilter}
-          />
-          <LimitList onChange={this.loadSpentTime} />
+        <div className="filterComponent">
+          <div className="filterComponentInputs">
+            <InputFilter
+              placeholder="Issue ID"
+              type="issueId"
+              propsId={issueId}
+              onLoad={this.loadSpentTime}
+              onChangeFilter={this.onChangeFilter}
+            />
+            <ProjectSelect
+              selectedProject={selectedProject}
+              onSelectedProject={this.onChangeFilter}
+            />
+          </div>
+          <div>
+            <LimitList onChange={this.loadSpentTime} />
+          </div>
         </div>
         {ListSpentTime && ListSpentTime.length > 0 ? (
           <div>
             <Table celled inverted selectable>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>Project</Table.HeaderCell>
-                  <Table.HeaderCell>Date</Table.HeaderCell>
-                  <Table.HeaderCell>User</Table.HeaderCell>
-                  <Table.HeaderCell>Activity</Table.HeaderCell>
-                  <Table.HeaderCell>Issues</Table.HeaderCell>
-                  <Table.HeaderCell>Comment</Table.HeaderCell>
-                  <Table.HeaderCell>Hours</Table.HeaderCell>
+                  <Table.HeaderCell width={3}>Project</Table.HeaderCell>
+                  <Table.HeaderCell width={2}>User</Table.HeaderCell>
+                  <Table.HeaderCell textAlign="center" width={2}>
+                    Activity
+                  </Table.HeaderCell>
+                  <Table.HeaderCell textAlign="center" width={2}>
+                    Issues
+                  </Table.HeaderCell>
+                  <Table.HeaderCell width={4}>Comment</Table.HeaderCell>
+                  <Table.HeaderCell textAlign="center" width={1}>
+                    Hours
+                  </Table.HeaderCell>
+                  <Table.HeaderCell textAlign="center" width={2}>
+                    Date
+                  </Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
 
               <Table.Body>
                 {ListSpentTime.map(time => (
                   <Table.Row key={`spentTime_id:${time.id}`}>
-                    <Table.Cell>
+                    <Table.Cell width={3}>
                       <Link to={`/project/${time.project.id}`}>
                         {time.project.name}
                       </Link>
                     </Table.Cell>
-                    <Table.Cell>{time.created_on}</Table.Cell>
-                    <Table.Cell textAlign="right">{time.user.name}</Table.Cell>
-                    <Table.Cell textAlign="right">
+
+                    <Table.Cell width={2}>{time.user.name}</Table.Cell>
+                    <Table.Cell textAlign="center" width={2}>
                       {time.activity.name}
                     </Table.Cell>
-                    <Table.Cell textAlign="right">{`Bug #${time.issue &&
-                      time.issue.id}`}</Table.Cell>
-                    <Table.Cell textAlign="right">{time.comments}</Table.Cell>
-                    <Table.Cell textAlign="right">{time.hours}</Table.Cell>
+                    <Table.Cell textAlign="center" width={2}>
+                      {time.issue && time.issue.id && (
+                        <Link to={`/issues/${time.issue.id}`}>
+                          {`Bug #${time.issue.id}`}
+                        </Link>
+                      )}
+                    </Table.Cell>
+                    <Table.Cell width={4}>{time.comments}</Table.Cell>
+                    <Table.Cell textAlign="center" width={1}>
+                      {time.hours}
+                    </Table.Cell>
+                    <Table.Cell textAlign="center" width={2}>
+                      {moment(time.created_on).format("YYYY-MM-DD HH:MM")}
+                    </Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>

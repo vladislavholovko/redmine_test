@@ -5,6 +5,7 @@ import projects from "./allProject";
 import issues from "./issues";
 import limit from "./limit";
 import spentTime from "./spentTime";
+import comments from "./comments";
 //-------------
 export default combineReducers({
   user,
@@ -12,4 +13,5 @@ export default combineReducers({
   issues,
   limit,
   spentTime,
+  comments,
 });

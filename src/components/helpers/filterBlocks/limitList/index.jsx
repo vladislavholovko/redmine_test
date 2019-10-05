@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 //-------------
-import { Button } from "semantic-ui-react";
-//-------------
 import * as LimitActions from "../../../../actions/limitListAction";
+//-------------
+import { Label } from "semantic-ui-react";
+import './limitList.css'
 //-------------
 
 class LimitList extends Component {
@@ -19,19 +20,28 @@ class LimitList extends Component {
     let { limit } = this.props;
 
     return (
-      <div>
-        <Button primary={limit === 10} onClick={() => this.onChangeLimit(10)}>
+      <div className="limitListBlock">
+        <Label
+          circular
+          color={limit === 5 ? "blue" : "grey"}
+          onClick={() => this.onChangeLimit(5)}
+        >
+          5
+        </Label>
+        <Label
+          circular
+          color={limit === 10 ? "blue" : "grey"}
+          onClick={() => this.onChangeLimit(10)}
+        >
           10
-        </Button>
-        <Button primary={limit === 25} onClick={() => this.onChangeLimit(25)}>
-          25
-        </Button>
-        <Button primary={limit === 50} onClick={() => this.onChangeLimit(50)}>
-          50
-        </Button>
-        <Button primary={limit === 100} onClick={() => this.onChangeLimit(100)}>
-          100
-        </Button>
+        </Label>
+        <Label
+          circular
+          color={limit === 15 ? "blue" : "grey"}
+          onClick={() => this.onChangeLimit(15)}
+        >
+          15
+        </Label>
       </div>
     );
   }

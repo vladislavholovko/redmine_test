@@ -33,10 +33,9 @@ class ProjectSelect extends Component {
 
     return (
       <Select
-        fluid
         value={selectedProject}
         options={optionListProject}
-        placeholder="Project List"
+        placeholder="Projects List"
         onChange={(e, { value }) => onSelectedProject("selectedProject", value, true)}
       />
     );

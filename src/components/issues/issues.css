@@ -1,3 +1,16 @@
 .listIssuesBlock {
   height: 100%;
+  padding: 10px;
+  overflow: auto;
+}
+
+.filterComponent {
+  display: flex;
+  flex-direction: column;
+}
+
+.filterComponentInputs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }

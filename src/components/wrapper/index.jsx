@@ -16,6 +16,7 @@ import HeaderBlock from "../header";
 import ProjectsBlock from "../projects/index";
 import ProjectInfo from "../projects/projectInfo";
 import IssuesBlock from "../issues/index";
+import IssuesInfo from "../issues/issueInfo";
 import SpentTimeBlock from "../spentTime/index";
 //-------------
 
@@ -53,8 +54,9 @@ class Wrapper extends Component {
             <Switch>
               <PrivateRoute exact path="/project" component={ProjectsBlock} />
               <PrivateRoute path="/project/:id" component={ProjectInfo} />
-              <PrivateRoute path="/issues" component={IssuesBlock} />
-              <PrivateRoute path="/time" component={SpentTimeBlock} />
+              <PrivateRoute exact path="/issues" component={IssuesBlock} />
+              <PrivateRoute path="/issues/:id" component={IssuesInfo} />
+              <PrivateRoute exact path="/time" component={SpentTimeBlock} />
               <PrivateRoute component={PageNotFound} />
             </Switch>
           </div>

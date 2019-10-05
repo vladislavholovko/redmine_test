@@ -1,0 +1,9 @@
+.limitListBlock {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+}
+
+.limitListBlock div{
+	cursor: pointer;
+}
