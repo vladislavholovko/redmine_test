@@ -6,12 +6,19 @@ import { getTokenFromLocalStorage } from "../localStorage";
 import { PROJECTS } from "../../reducers/const";
 //-------------
 
-export async function getAllProjects() {
+export async function getAllProjects(limit, page) {
   let url = "/projects.json";
   const key = getTokenFromLocalStorage("api_key");
 
   let params = {};
   params.key = key;
+
+  if (page) {
+    params.page = page;
+  }
+  if (limit) {
+    params.limit = limit;
+  }
 
   let response = await api.get(url, { params });
 
