@@ -19,7 +19,7 @@ class ProjectInfoIssueList extends Component {
               onClick={() => onRedirectToIssueInfo(issue.id)}
               className="projectInfoAboutSomeIssueBlockId"
             >
-              №: {issue.id}
+              Issue №: {issue.id}
             </div>
             <div className="projectInfoAboutSomeIssueBlockData">
               {moment(issue.created_on).format("YYYY-MM-DD HH:MM")}

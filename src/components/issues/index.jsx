@@ -156,7 +156,7 @@ class IssuesBlock extends Component {
             />
           </div>
         ) : (
-          <InfoNotFound text="list issues not found" />
+          <InfoNotFound text="list issues empty" />
         )}
       </div>
     ) : (

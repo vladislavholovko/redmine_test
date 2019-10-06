@@ -1,6 +1,7 @@
 .modal_content {
   display: flex;
   flex-direction: column;
+	background: rgb(224, 222, 222) !important;
 }
 
 .modal_content_info {
@@ -27,10 +28,11 @@
 
 .modal_header {
 	text-align: center;
+	background: rgb(196, 196, 196) !important;
 }
 
 .modal_button_segment {
-
+	background: rgb(196, 196, 196) !important;
 }
 
 .modal_content_error {

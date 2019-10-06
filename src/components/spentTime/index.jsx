@@ -145,7 +145,7 @@ class SpentTimeBlock extends Component {
             />
           </div>
         ) : (
-          <InfoNotFound text="list issues not found" />
+          <InfoNotFound text="list spent time empty" />
         )}
       </div>
     ) : (

@@ -14,6 +14,7 @@ import LimitList from "../helpers/filterBlocks/limitList";
 import Pagination from "../helpers/filterBlocks/pagination/pagination";
 import NewSpentTimeModal from "../helpers/addSpentTime";
 import CommentsBlock from "../helpers/commentsBlock";
+import SpentTimeList from "./spentTimeList";
 //-------------
 
 class IssueInfo extends Component {
@@ -73,62 +74,49 @@ class IssueInfo extends Component {
     }
   };
 
+  onRedirectToIssueInfo = async projectId => {
+    this.props.history.push(`/project/${projectId}`);
+  };
+
   render() {
     // console.log("ISSUE_STATE", this.state);
     let { loading, issue, page, spentTime } = this.state;
     let ListSpentTime = spentTime.time_entries;
 
     return !loading ? (
-      <div>
+      <div className="listIssuesBlock">
         {issue ? (
-          <div>
-            <div>
-              <p>{issue.project.name}</p>
-              <p>{issue.id}</p>
-              <div>
-                {spentTime && spentTime.total_count && (
-                  <i>Spent Time Count {spentTime.total_count}</i>
+          <div className="issuesInfoBlock">
+            <div className="issuesInfoBlockTitle">
+              <b
+                onClick={() => {
+                  this.onRedirectToIssueInfo(issue.project.id);
+                }}
+              >
+                {issue.project.name}
+              </b>
+              <p>Issue №:{issue.id}</p>
+            </div>
+            <div className="filterComponentInputs">
+              {ListSpentTime &&
+                ListSpentTime.length > 0 &&
+                spentTime &&
+                spentTime.total_count && (
+                  <div className="totalCountLength">
+                    <p>Spent Time Count:</p> <b>{spentTime.total_count}</b>
+                  </div>
                 )}
-              </div>
-            </div>
-            <div>
-              <LimitList onChange={this.loadSpentTime} />
+
               <NewSpentTimeModal issueId={issue.id} />
+              {ListSpentTime && ListSpentTime.length > 0 && (
+                <LimitList onChange={this.loadSpentTime} />
+              )}
             </div>
+
             <div>
               {ListSpentTime && ListSpentTime.length > 0 ? (
                 <div>
-                  <Table celled selectable>
-                    <Table.Header>
-                      <Table.Row>
-                        <Table.HeaderCell>Date</Table.HeaderCell>
-                        <Table.HeaderCell>User</Table.HeaderCell>
-                        <Table.HeaderCell>Activity</Table.HeaderCell>
-                        <Table.HeaderCell>Comment</Table.HeaderCell>
-                        <Table.HeaderCell>Hours</Table.HeaderCell>
-                      </Table.Row>
-                    </Table.Header>
-
-                    <Table.Body>
-                      {ListSpentTime.map(time => (
-                        <Table.Row key={`spentTime_id:${time.id}`}>
-                          <Table.Cell>{time.created_on}</Table.Cell>
-                          <Table.Cell textAlign="right">
-                            {time.user.name}
-                          </Table.Cell>
-                          <Table.Cell textAlign="right">
-                            {time.activity.name}
-                          </Table.Cell>
-                          <Table.Cell textAlign="right">
-                            {time.comments}
-                          </Table.Cell>
-                          <Table.Cell textAlign="right">
-                            {time.hours}
-                          </Table.Cell>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table>
+                  <SpentTimeList ListSpentTime={ListSpentTime} />
                   <Pagination
                     page={page}
                     totalCount={spentTime.total_count}

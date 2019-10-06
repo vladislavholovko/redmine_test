@@ -125,6 +125,7 @@ class NewSpentTimeModal extends Component {
         }
         open={openModal}
         onClose={() => this.onCloseModal()}
+        dimmer="blurring"
       >
         <Modal.Header className="modal_header">ADD SPENT TIME</Modal.Header>
         <Modal.Content className="modal_content">

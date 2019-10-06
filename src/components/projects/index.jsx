@@ -73,7 +73,7 @@ class ProjectsBlock extends Component {
             </Table>
           </div>
         ) : (
-          <InfoNotFound text="list project not found" />
+          <InfoNotFound text="list project empty" />
         )}
       </Fragment>
     ) : (
