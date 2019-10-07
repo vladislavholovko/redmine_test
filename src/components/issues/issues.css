@@ -36,6 +36,8 @@
   font-size: 25px;
   font-weight: 900;
   cursor: pointer;
+  text-shadow: white 1px 1px 0, white -1px -1px 0,
+  white -1px 1px 0, white 1px -1px 0;
 }
 
 .issuesInfoBlockTitle p {
@@ -43,6 +45,8 @@
   font-size: 17px;
   text-align: center;
   font-family: "Pacifico", cursive;
+  text-shadow: white 1px 1px 0, white -1px -1px 0,
+  white -1px 1px 0, white 1px -1px 0;
 }
 
 .someSpentTimeInfoAboutBlockId {
@@ -52,6 +56,10 @@
   font-size: 20px;
   font-weight: 600;
   font-family: "Pacifico", cursive;
+}
+
+.addButtonBlock {
+  margin-right: 65px;
 }
 
 

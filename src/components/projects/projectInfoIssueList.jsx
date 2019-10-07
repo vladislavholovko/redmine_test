@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { withRouter } from "react-router";
 //-------------
 import "./projects.css";
@@ -38,20 +38,26 @@ class ProjectInfoIssueList extends Component {
                 <div>{issue.priority.name}</div>
               </div>
             </div>
+            {issue.author.name && (
+              <div className="projectInfoAboutSomeIssueBlockUsers">
+                <div>Author:</div>
+                <div>{issue.author.name}</div>
+              </div>
+            )}
 
-            <div className="projectInfoAboutSomeIssueBlockUsers">
-              <div>Author:</div>
-              <div>{issue.author.name}</div>
-            </div>
-            <div className="projectInfoAboutSomeIssueBlockUsers">
-              <div>Assignee:</div>
-              <div>{issue.assigned_to && issue.assigned_to.name}</div>
-            </div>
+            {issue.assigned_to && issue.assigned_to.name && (
+              <div className="projectInfoAboutSomeIssueBlockUsers">
+                <div>Assignee:</div>
+                <div>{issue.assigned_to.name}</div>
+              </div>
+            )}
 
-            <div className="projectInfoAboutSomeIssueBlockSubject">
-              <div>Subject:</div>
-              <div>{issue.subject}</div>
-            </div>
+            {issue.subject && (
+              <div className="projectInfoAboutSomeIssueBlockSubject">
+                <div>Subject:</div>
+                <div>{issue.subject}</div>
+              </div>
+            )}
           </div>
         ))}
       </div>

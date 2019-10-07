@@ -17,11 +17,11 @@ import DateTime from "../../helpers/datePicker";
 import * as TimeActions from "../../../actions/spentTimeActions";
 //-------------
 const activityList = [
-  { value: "9", text: "Design" },
-  { value: "10", text: "Development" },
-  { value: "11", text: "Management" },
-  { value: "12", text: "Testing" },
-  { value: "13", text: "Automation QA" }
+  { value: "8", text: "Design" },
+  { value: "9", text: "Development" },
+  { value: "10", text: "Management" },
+  { value: "11", text: "Testing" },
+  { value: "12", text: "Automation QA" }
 ];
 //-------------
 
@@ -106,7 +106,6 @@ class NewSpentTimeModal extends Component {
   render() {
     let { openModal, loading, timeObject, error } = this.state;
     let { issueId, projectId } = this.props;
-    console.log("MODAL_TIME_STATE", this.state);
 
     return (
       <Modal

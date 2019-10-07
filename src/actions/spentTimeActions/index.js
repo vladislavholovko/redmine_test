@@ -55,10 +55,9 @@ export async function createSpentTime(timeObject) {
   if (timeObject.project_id) {
     url += `time_entry[project_id]=${timeObject.project_id}`;
   }
-  /*  if (timeObject.spent_on) {
+    if (timeObject.spent_on) {
     url += `&time_entry[spent_on]=${timeObject.spent_on}`;
-  }*/
-
+  }
   if (timeObject.hours) {
     url += `&time_entry[hours]=${timeObject.hours}`;
   }
@@ -85,7 +84,6 @@ export async function createSpentTime(timeObject) {
   const key = getTokenFromLocalStorage("api_key");
   let params = {};
   params.key = key;
-  console.log("AAA");
 
   if (timeObject.issue_id) {
     params.time_entry.issue_id = timeObject.issue_id;

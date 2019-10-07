@@ -79,7 +79,6 @@ class IssueInfo extends Component {
   };
 
   render() {
-    // console.log("ISSUE_STATE", this.state);
     let { loading, issue, page, spentTime } = this.state;
     let ListSpentTime = spentTime.time_entries;
 
@@ -106,8 +105,9 @@ class IssueInfo extends Component {
                     <p>Spent Time Count:</p> <b>{spentTime.total_count}</b>
                   </div>
                 )}
-
-              <NewSpentTimeModal issueId={issue.id} />
+              <div className="addButtonBlock">
+                <NewSpentTimeModal issueId={issue.id} />
+              </div>
               {ListSpentTime && ListSpentTime.length > 0 && (
                 <LimitList onChange={this.loadSpentTime} />
               )}

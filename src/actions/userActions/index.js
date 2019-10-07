@@ -5,7 +5,6 @@ import { USER } from "../../reducers/const";
 //-------------
 import {
   deleteTokenFromLocalStorage,
-  getTokenFromLocalStorage,
   setTokenToLocalStorage
 } from "../localStorage";
 //-------------

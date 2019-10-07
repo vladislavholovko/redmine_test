@@ -23,6 +23,8 @@
   text-align: center;
   font-size: 25px;
   font-weight: 900;
+    text-shadow: white 1px 1px 0, white -1px -1px 0,
+  white -1px 1px 0, white 1px -1px 0;
 }
 
 .projectInfoBlockTitle p {
@@ -30,6 +32,8 @@
   font-size: 17px;
   text-align: center;
   font-family: "Pacifico", cursive;
+  text-shadow: white 1px 1px 0, white -1px -1px 0,
+  white -1px 1px 0, white 1px -1px 0;
 }
 
 /*-------------*/

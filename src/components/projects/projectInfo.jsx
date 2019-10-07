@@ -81,7 +81,6 @@ class ProjectInfo extends Component {
   };
 
   render() {
-    // console.log("PROJECT_STATE", this.state);
     let { loading, project, issues, page } = this.state;
     let ListIssues = issues.issues;
 
@@ -101,7 +100,9 @@ class ProjectInfo extends Component {
                       <p>Issues Count:</p> <b>{issues.total_count}</b>
                     </div>
                   )}
-                  <NewSpentTimeModal projectId={project.id} />
+                  <div className="addButtonBlock">
+                    <NewSpentTimeModal projectId={project.id} />
+                  </div>
                   <LimitList onChange={this.loadIssues} />
                 </div>
                 <div>
@@ -116,7 +117,6 @@ class ProjectInfo extends Component {
                     onChangePage={this.onChangeFilter}
                   />
                 </div>
-
               </div>
             ) : (
               <InfoNotFound text="list issues not found" />

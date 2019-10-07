@@ -29,12 +29,12 @@ class SpentTimeList extends Component {
               </div>
             )}
 
-            {spentTime.hours && (
+
               <div className="projectInfoAboutSomeIssueBlockUsers">
                 <div>Hours:</div>
                 <div>{spentTime.hours}</div>
               </div>
-            )}
+
 
             {spentTime.spent_on && (
               <div className="projectInfoAboutSomeIssueBlockUsers">
@@ -50,10 +50,10 @@ class SpentTimeList extends Component {
               </div>
             )}
 
-            {spentTime.comment && (
+            {spentTime.comments && (
               <div className="projectInfoAboutSomeIssueBlockSubject">
                 <div>Comment:</div>
-                <div>{spentTime.comment}</div>
+                <div>{spentTime.comments}</div>
               </div>
             )}
           </div>
